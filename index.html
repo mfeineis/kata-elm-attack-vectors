@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Elm Attack Vectors Playground</title>
+    <script src="js/head-compromised.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script src="js/body-compromised-before-app-source.js"></script>
+    <script src="dist/app.js?v1"></script>
+    <script src="js/body-compromised-after-app-source.js"></script>
+    <script>
+    (function () {
+
+     const app = Elm.App.init({
+         flags: {},
+         node: document.querySelector("#root"),
+     });
+
+    }());
+    </script>
+    <script src="js/body-compromised-after-app-init.js"></script>
+</body>
+</html>

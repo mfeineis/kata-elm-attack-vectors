@@ -1,0 +1,22 @@
+{
+  "name": "kata-elm-attack-vectors",
+  "version": "0.1.0",
+  "description": "Exploring ways to attack an Elm app in a compromised JS environment",
+  "main": "index.js",
+  "repository": "https://github.com/mfeineis/kata-elm-attack-vectors",
+  "author": "Martin Feineis <mfeineis@users.noreply.github.com>",
+  "license": "BSD-3-Clause",
+  "private": true,
+  "scripts": {
+    "build": "elm make src/App.elm --output dist/app.js --optimize && NODE_ENV=production terser dist/app.js --compress 'pure_funcs=\"F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9\",pure_getters,keep_fargs=false,unsafe_comps,unsafe' | terser --mangle --output=dist/app.js",
+    "debug": "elm make src/App.elm --output dist/app.js",
+    "start": "serve -p 5000"
+  },
+  "peerDependencies": {
+    "elm": "0.19.0-no-deps"
+  },
+  "devDependencies": {
+    "serve": ">=11.1.0",
+    "terser": "^4.1.4"
+  }
+}
