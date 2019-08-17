@@ -244,4 +244,34 @@
         log("The 'privateKey' shows up somewhere in the following entries");
     });
 
+    // TODO: Couldn't manage to peek into the model via 'Object.prototype' yet
+    //scenario("Patching 'Object.prototype'", function (log, remarks) {
+
+    //    log("Patching 'Object.prototype' to intercept 'a' property used in 'Result'");
+    //    Object.defineProperty(Object.prototype, 'a', (function () {
+    //        const lookup = new Map();
+    //        return {
+    //            configurable: false,
+    //            get: function () {
+    //                const value = lookup.get(this);
+    //                log(JSON.stringify(value));
+    //                return value;
+    //            },
+    //            set: function (value) {
+    //                //console.log("intercept", value, "on", this);
+    //                //log(JSON.stringify([].slice.call(arguments)));
+    //                lookup.set(this, value);
+    //            },
+    //        };
+    //    }()));
+
+    //    log("Clicking all buttons to produce Elm messages...");
+    //    [].slice.call(document.querySelectorAll("button")).forEach(function (btn) {
+    //        console.log(btn);
+    //        btn.click();
+    //    });
+
+    //    log("The 'privateKey' shows up somewhere in the following entries");
+    //});
+
 }));
