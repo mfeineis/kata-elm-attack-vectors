@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <!-- Don't use this CSP sallowing 'unsafe-inline' in real apps! -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self'; style-src 'self';">
     <title>Elm Attack Vectors Playground</title>
+    <link rel="stylesheet" href="assets/tailwind-cdn.min.css" type="text/css">
     <script src="js/head-compromised.js"></script>
 </head>
 <body>
+    <!-- This would be the proper CSP disallowing 'unsafe-inline', please use something like this in real apps! -->
+    <x-meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';"></x-meta>
+    <div id="abstract" class="bg-gray-100 border-b border-gray-400 mb-4 p-4">
+        The goal for each of the following attack scenarios is to extract
+        the "privateKey" field inside the Elm app's model.
+    </div>
     <div id="root"></div>
+    <ul id="storyboard" class="m-4"></ul>
+
     <script src="js/body-compromised-before-app-source.js"></script>
     <script src="dist/app.js?v1"></script>
     <script src="js/body-compromised-after-app-source.js"></script>
-    <script>
-    (function () {
-
-     const app = Elm.App.init({
-         flags: {},
-         node: document.querySelector("#root"),
-     });
-
-    }());
-    </script>
+    <script src="js/main.js"></script>
     <script src="js/body-compromised-after-app-init.js"></script>
 </body>
 </html>
