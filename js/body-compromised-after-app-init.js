@@ -210,4 +210,38 @@
 
     });
 
+    scenario("Patching 'Function.prototype'", function (log, remarks) {
+
+        log("Patching 'Function.prototype' to intercept 'f' property used by 'A2'");
+        Object.defineProperty(Function.prototype, 'f', (function () {
+            const lookup = new Map();
+            return {
+                configurable: false,
+                get: function () {
+                    return lookup.get(this);
+                },
+                set: function (fn) {
+                    //console.log("intercept", fn, "on", this);
+                    lookup.set(this, function () {
+                        if (arguments.length === 2) {
+                            //console.log("spying on 'A2'", arguments);
+                            log(JSON.stringify([].slice.call(arguments)));
+                            return fn.apply(this, arguments);
+                        }
+
+                        return fn.apply(this, arguments);
+                    });
+                },
+            };
+        }()));
+
+        log("Clicking all buttons to produce Elm messages...");
+        [].slice.call(document.querySelectorAll("button")).forEach(function (btn) {
+            console.log(btn);
+            btn.click();
+        });
+
+        log("The 'privateKey' shows up somewhere in the following entries");
+    });
+
 }));
