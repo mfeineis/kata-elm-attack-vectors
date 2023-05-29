@@ -1,5 +1,5 @@
 # kata-elm-attack-vectors
-Exploring ways to attack an Elm app in a compromised JS environment
+Exploring ways to attack an Elm 0.19.0 app in a compromised JS environment
 
 ## What do I do?
 * Install [NodeJS](https://nodejs.org)
